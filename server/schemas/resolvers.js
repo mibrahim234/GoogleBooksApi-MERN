@@ -42,31 +42,71 @@ Query: {
       const token = signToken(user);
       return { token, user };
     },
-    // save a book 
+    
     savedBooks: async (parent, {bookData}, context) => {
-      
+      if (context.user) {
         const savedData = await Book.findByIdAndUpdate(
-            { _id: context.user._id },
-            { $push: { savedBooks: bookData } },
-            // return statement for db
-            { new: true }
-          );
+          { _id: context.user._id },
+          { $push: { savedBooks: bookData } },
+          // return statement for db
+          { new: true }
+        ).populate('savedBooks');
+
+        return savedData;
+      }
+
+      throw new AuthenticationError('try again!');
+    }
+},
+
+
+  removeBook: async (parent, { bookId }, context) => {
+    if (context.user) {
+      const removeData = await Book.findByIdAndUpdate(
+        { _id: context.user._id },
+        { $pull: { savedBooks: bookId } },
+        // return statement for db
+        { new: true }
+      );
+
+      return removeData;
+    }
+
+    throw new AuthenticationError('Invalid Entry');
+  }
+};
   
-          return savedData;
-        }
-    },
-      // remove a book 
-    removeBook: async (parent, {bookId}, context) => {
-        const removeData = await Book.findByIdAndUpdate(
-            { _id: context.user._id },
-            { $pull: { savedBooks: bookId } },
-            // return statement for db
-            { new: true }
-          );
-  
-          return removeData;
-        
-    },
-}
+
+
 
 module.exports = resolvers;
+
+// save a book 
+    // savedBooks: async (parent, {bookData}, context) => {
+      
+    //     const savedData = await Book.findByIdAndUpdate(
+    //         { _id: context.user._id },
+    //         { $push: { savedBooks: bookData } },
+    //         // return statement for db
+    //         { new: true }
+    //       );
+  
+    //       return savedData;
+    //     }
+    // },
+
+  // remove a book 
+  //   removeBook: async (parent, {bookId}, context) => {
+  //       const removeData = await Book.findByIdAndUpdate(
+  //           { _id: context.user._id },
+  //           { $pull: { savedBooks: bookId } },
+  //           // return statement for db
+  //           { new: true }
+  //         );
+  
+  //         return removeData;
+  //   }
+  //   throw new AuthenticationError('You need to be logged in!');
+  //     }
+    
+  // };
