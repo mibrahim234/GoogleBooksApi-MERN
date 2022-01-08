@@ -7,11 +7,15 @@ const { signToken } = require('../utils/auth');
 const resolvers = {
 // get route 
 Query: {
-    books: async () => {
-      return Book.find();
-    },
-    book: async (parent, { title }) => {
-      return Book.findOne({ title });
+    me: async (parent, args, context) => {
+        if (context.user) {
+            const userData = await User.findOne({_id: context.user._id})
+            .select('-__v -password')
+            return userData
+        } 
+        if (!user) {
+            throw new AuthenticationError('Not logged in');
+          }
     }
   },
 
@@ -38,18 +42,34 @@ Query: {
       const token = signToken(user);
       return { token, user };
     },
-    // fix this 
-    saveBook: async (parent, {bookData}) => {
-      const book = await Book.create(bookData);
-      return book; 
+    savedBooks: async (parent, {bookData}, context) => {
+      
+        const savedData = await User.findByIdAndUpdate(
+            { _id: context.user._id },
+            { $push: { savedBooks: bookData } },
+            // return statement for db
+            { new: true }
+          );
+  
+          return savedData;
+        }
     },
       // fix this 
-      removeBook: async (parent, {bookData}) => {
-        const book = await Book.create(bookData);
-        return book; 
-      }
-    }
-  }
-
+          // in user model find by id and update
+    // once you find id pull bookdata into the saved book variable in users model
+    // return
+    // store savedbooks in a const and return that 
+    removeBook: async (parent, {bookId}, context) => {
+        const removeData = await User.findByIdAndUpdate(
+            { _id: context.user._id },
+            { $pull: { savedBooks: bookId } },
+            // return statement for db
+            { new: true }
+          );
+  
+          return removeData;
+        
+    },
+}
 
 module.exports = resolvers;
