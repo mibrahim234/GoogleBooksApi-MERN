@@ -31,14 +31,23 @@ type Auth {
     me: User
     users: [User]
     user(username: String!): User
-    books(username: String): [Book]
+    books(username: String!): [Book]
     book(_id: ID!): Book
   }
+
+  input bookDataInput {
+    authors: String!,
+    description: String!,
+    bookId: String!,
+    image: String!,
+    link: String!,
+	title: String!
+}
 
   type Mutation {
     login(email: String!, password: String!): Auth
     addUser(username: String!, email: String!, password: String!): Auth
-    addBook(authors: String!): Book
-  }
+    addBook(bookData: bookDataInput!) : Book
+}
 `
 module.exports = typeDefs;
