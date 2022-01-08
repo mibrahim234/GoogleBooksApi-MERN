@@ -1,7 +1,7 @@
 // simple object called resolvers with a query nested object that holds a series of methods 
 // These methods get the same name of the query or mutation they are resolvers for.
 const { AuthenticationError } = require('apollo-server-express');
-const { User, Thought } = require('../models');
+const { User, Book } = require('../models');
 const { signToken } = require('../utils/auth');
 
 const resolvers = {
@@ -42,9 +42,10 @@ Query: {
       const token = signToken(user);
       return { token, user };
     },
+    // save a book 
     savedBooks: async (parent, {bookData}, context) => {
       
-        const savedData = await User.findByIdAndUpdate(
+        const savedData = await Book.findByIdAndUpdate(
             { _id: context.user._id },
             { $push: { savedBooks: bookData } },
             // return statement for db
@@ -54,13 +55,9 @@ Query: {
           return savedData;
         }
     },
-      // fix this 
-          // in user model find by id and update
-    // once you find id pull bookdata into the saved book variable in users model
-    // return
-    // store savedbooks in a const and return that 
+      // remove a book 
     removeBook: async (parent, {bookId}, context) => {
-        const removeData = await User.findByIdAndUpdate(
+        const removeData = await Book.findByIdAndUpdate(
             { _id: context.user._id },
             { $pull: { savedBooks: bookId } },
             // return statement for db
