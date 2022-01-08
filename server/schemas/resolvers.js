@@ -45,12 +45,12 @@ Query: {
     
     savedBooks: async (parent, {bookData}, context) => {
       if (context.user) {
-        const savedData = await Book.findByIdAndUpdate(
+        const savedData = await User.findByIdAndUpdate(
           { _id: context.user._id },
           { $push: { savedBooks: bookData } },
           // return statement for db
           { new: true }
-        ).populate('savedBooks');
+        );
 
         return savedData;
       }
@@ -62,7 +62,7 @@ Query: {
 
   removeBook: async (parent, { bookId }, context) => {
     if (context.user) {
-      const removeData = await Book.findByIdAndUpdate(
+      const removeData = await User.findByIdAndUpdate(
         { _id: context.user._id },
         { $pull: { savedBooks: bookId } },
         // return statement for db
