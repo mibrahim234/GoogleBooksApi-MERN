@@ -20,7 +20,7 @@ const startServer = async () => {
     typeDefs,
     resolvers,
     context: authMiddleware,
-        //This ensures that every request performs an authentication check, and the updated request object will be passed to the resolvers as the context
+//This ensures that every request performs an authentication check, and the updated request object will be passed to the resolvers as the context
   });
 
    // Start the Apollo server
