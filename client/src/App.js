@@ -22,13 +22,14 @@ import {
 import { setContext } from '@apollo/client/link/context';
 // With this function, setContext, we can create essentially a middleware function that will retrieve the token for us and combine it with the existing httpLink
 
-// Import Pages:
+// Import Components:
 import Navbar from './components/Navbar'; 
-
 import LoginForm from './components/LoginForm';
+import SignupForm from './components/SignupForm';
+
+// import pages
 import SavedBooks from './pages/SavedBooks';
 import SearchBooks from './pages/SearchBooks';
-import SignupForm from './components/SignupForm';
 import NoMatch from './pages/NoMatch';
 
 
@@ -69,8 +70,6 @@ function App() {
           <Route exact path='/' component={SearchBooks} />
           <Route exact path="/login" component={LoginForm} />
               <Route exact path="/signup" component={SignupForm} />
-           <Route exact path='/search' component={SearchBooks} />
-          <Route exact path='/saved' component={SavedBooks} />
           <Route component={NoMatch} />
             </Switch>
       </>
