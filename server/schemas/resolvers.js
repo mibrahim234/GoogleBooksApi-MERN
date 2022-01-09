@@ -56,9 +56,7 @@ Query: {
       }
 
       throw new AuthenticationError('try again!');
-    }
-},
-
+    },
 
   removeBook: async (parent, { bookId }, context) => {
     if (context.user) {
@@ -74,6 +72,7 @@ Query: {
 
     throw new AuthenticationError('Invalid Entry');
   }
+}
 };
   
 

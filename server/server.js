@@ -41,14 +41,14 @@ app.use(express.json());
 
 // IF AND APP.GET ARE FOR PRODUCTION ONLY--code out when using locally 
 // if we're in production, serve client/build as static assets
-if (process.env.NODE_ENV === 'production') {
-  app.use(express.static(path.join(__dirname, '../client/build')));
-}
+// if (process.env.NODE_ENV === 'production') {
+//   app.use(express.static(path.join(__dirname, '../client/build')));
+// }
 
 // if we make a GET request to any location on the server that doesn't have an explicit route defined, respond with the production-ready React front-end code
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../client/build/index.html'));
-});
+// app.get('*', (req, res) => {
+//   res.sendFile(path.join(__dirname, '../client/build/index.html'));
+// });
 
 // app.use(routes);
 
