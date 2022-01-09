@@ -1,14 +1,20 @@
-// * Use the Apollo `useMutation()` Hook to execute the `SAVE_BOOK` mutation in the `handleSaveBook()` function instead of the `saveBook()` function imported from the `API` file. Define and export the `SAVE_BOOK` mutation in a new file at `/client/src/utils/mutations.js`.
+// TO DO: use Savebook mutation 
+//  Define and export the `SAVE_BOOK` mutation in a new file at `/client/src/utils/mutations.js`.
 
 // 	* Make sure you keep the logic for saving the book's ID to state in the `try...catch` block! 
-
 
 import React, { useState, useEffect } from 'react';
 import { Jumbotron, Container, Col, Form, Button, Card, CardColumns } from 'react-bootstrap';
 
+import { GET_ME} from '../utils/queries';
+import { SAVED_BOOKS } from '../utils/mutations';
+
+// useMutation hook 
+import { useQuery, useMutation } from '@apollo/client';
 import Auth from '../utils/auth';
 import { saveBook, searchGoogleBooks } from '../utils/API';
 import { saveBookIds, getSavedBookIds } from '../utils/localStorage';
+
 
 const SearchBooks = () => {
   // create state for holding returned google api data
@@ -25,7 +31,7 @@ const SearchBooks = () => {
     return () => saveBookIds(savedBookIds);
   });
 
-  // create method to search for books and set state on form submit
+ 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
 
@@ -56,6 +62,11 @@ const SearchBooks = () => {
       console.error(err);
     }
   };
+
+ /// // * Use the Apollo `useMutation()` Hook to execute the `SAVE_BOOK` mutation in the `handleSaveBook()` function 
+  // instead of the `saveBook()` function imported from the `API` file.
+  // create method to search for books and set state on form submit
+const [savedBooks] = useMutation(SAVED_BOOKS);
 
   // create function to handle saving a book to our database
   const handleSaveBook = async (bookId) => {

@@ -1,10 +1,16 @@
-// `SignupForm.js`: Replace the `addUser()` functionality imported from the `API` file with the `ADD_USER` mutation functionality. Define and export the `ADD_USER` mutation in a new file at `/client/src/utils/mutations.js`.
+// `SignupForm.js`: Replace the `addUser()` functionality imported from the `API` file with the `ADD_USER` mutation functionality.
+// Define and export the `ADD_USER` mutation in a new file at `/client/src/utils/mutations.js`.
 
 import React, { useState } from 'react';
 import { Form, Button, Alert } from 'react-bootstrap';
 
 import { createUser } from '../utils/API';
 import Auth from '../utils/auth';
+
+import { ADD_USER } from '../utils/mutations';
+import { useMutation } from '@apollo/client';
+
+
 
 const SignupForm = () => {
   // set initial form state
