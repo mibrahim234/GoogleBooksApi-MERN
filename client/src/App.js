@@ -70,6 +70,7 @@ function App() {
           <Route exact path='/' component={SearchBooks} />
           <Route exact path="/login" component={LoginForm} />
               <Route exact path="/signup" component={SignupForm} />
+              <Route exact path='/saved' component={SavedBooks} />
           <Route component={NoMatch} />
             </Switch>
       </>
