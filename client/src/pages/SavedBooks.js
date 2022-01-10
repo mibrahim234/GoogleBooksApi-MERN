@@ -22,7 +22,7 @@ const SavedBooks = () => {
   const userDataLength = Object.keys(userData).length;
 
 // use the useQuery() Hook to execute the GET_ME query on load and save it to a variable named userData.
-const userData = {loading, data } = useQuery(GET_ME);
+// const userData = {loading, data } = useQuery(GET_ME);
 
 
 
@@ -53,7 +53,8 @@ const userData = {loading, data } = useQuery(GET_ME);
   }, [userDataLength]);
 
   // Use the useMutation() Hook to execute the REMOVE_BOOK mutation in the handleDeleteBook() function instead of the deleteBook() function that's imported from API file. (Make sure you keep the removeBookId() function in place!)
-const [removeBook] = useMutation(REMOVE_BOOK);
+// const [removeBook] = useMutation(REMOVE_BOOK);
+
   // create function that accepts the book's mongo _id value as param and deletes the book from the database
   const handleDeleteBook = async (bookId) => {
     const token = Auth.loggedIn() ? Auth.getToken() : null;

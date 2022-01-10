@@ -1,8 +1,16 @@
 // Create an Apollo Provider to make every request work with the Apollo server.
 // `App.js`: Using `ApolloClient`, `InMemoryCache`, `createHttpLink`, and `setContext` from the Apollo Client library, create an Apollo Provider to make every request work with the Apollo server.
-	
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+// Import Components:
+import Navbar from './components/Navbar'; 
+import LoginForm from './components/LoginForm';
+import SignupForm from './components/SignupForm';
+
+// import pages
+import SavedBooks from './pages/SavedBooks';
+import SearchBooks from './pages/SearchBooks';
+import NoMatch from './pages/NoMatch';
 
 import {
   ApolloClient,
@@ -20,15 +28,7 @@ import {
 import { setContext } from '@apollo/client/link/context';
 // With this function, setContext, we can create essentially a middleware function that will retrieve the token for us and combine it with the existing httpLink
 
-// Import Components:
-import Navbar from './components/Navbar'; 
-import LoginForm from './components/LoginForm';
-import SignupForm from './components/SignupForm';
 
-// import pages
-import SavedBooks from './pages/SavedBooks';
-import SearchBooks from './pages/SearchBooks';
-import NoMatch from './pages/NoMatch';
 
 
 
