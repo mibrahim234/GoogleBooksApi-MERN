@@ -22,7 +22,7 @@ import {
   createHttpLink,
  // allows us to control how the Apollo Client makes a request. Think of it like middleware for the outbound network requests.
 } from '@apollo/client';
-;
+
 
 //retrieve the token from localStorage and include it with each request to the API
 import { setContext } from '@apollo/client/link/context';
