@@ -4,12 +4,12 @@
 import React, { useState, useEffect } from 'react';
 import { Jumbotron, Container, CardColumns, Card, Button } from 'react-bootstrap';
 
-import { getMe, deleteBook } from '../utils/API';
+import { getMe, deleteBook } from '../../../server/old-code/API';
 import Auth from '../utils/auth';
 import { removeBookId } from '../utils/localStorage';
 
 import { GET_ME} from '../utils/queries';
-import { REMOVE_BOOK, SAVED_BOOKS } from '../utils/mutations';
+import { REMOVE_BOOK, SAVE_BOOK} from '../utils/mutations';
 
 
 // useMutation hook 
@@ -57,7 +57,7 @@ const [removeBook] = useMutation(REMOVE_BOOK);
   // create function that accepts the book's mongo _id value as param and deletes the book from the database
   const handleDeleteBook = async (bookId) => {
     const token = Auth.loggedIn() ? Auth.getToken() : null;
-
+    // ? true/false 
     if (!token) {
       return false;
     }

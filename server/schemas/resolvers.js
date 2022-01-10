@@ -43,7 +43,7 @@ Query: {
       return { token, user };
     },
     
-    savedBooks: async (parent, {bookData}, context) => {
+    saveBook: async (parent, {bookData}, context) => {
       if (context.user) {
         const savedData = await User.findByIdAndUpdate(
           { _id: context.user._id },
