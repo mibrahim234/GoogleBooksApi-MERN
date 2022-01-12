@@ -1,4 +1,4 @@
-# 18 NoSQL: Social Network API ![GitHub license](https://img.shields.io/badge/license-MIT%20License-blue.svg)
+# Search Books ![GitHub license](https://img.shields.io/badge/license-MIT%20License-blue.svg)
 
 <!-- ## Deployed Site -->
 
